@@ -5,7 +5,6 @@ local player = Players.LocalPlayer
 
 local flingActive = false
 
--- GUI (ResetOnSpawn = false gör att den stannar kvar efter död)
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "FlingGui"
 screenGui.ResetOnSpawn = false
@@ -18,7 +17,6 @@ mainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 mainFrame.Draggable = true
 mainFrame.Active = true
 
--- TEXT: Ossiz15 script
 local creditText = Instance.new("TextLabel", mainFrame)
 creditText.Size = UDim2.new(1, 0, 0, 20)
 creditText.Position = UDim2.new(0, 0, 0.05, 0)
@@ -37,7 +35,6 @@ btn.TextColor3 = Color3.new(1, 1, 1)
 btn.Font = Enum.Font.SourceSansBold
 btn.TextSize = 20
 
--- TOGGLE FUNKTION
 local function toggle()
     flingActive = not flingActive
     if flingActive then
@@ -49,7 +46,6 @@ local function toggle()
     end
 end
 
--- F-LYSSNARE
 UserInputService.InputBegan:Connect(function(input, processed)
     if input.KeyCode == Enum.KeyCode.F and not UserInputService:GetFocusedTextBox() then
         toggle()
@@ -58,25 +54,14 @@ end)
 
 btn.MouseButton1Click:Connect(toggle)
 
--- MAXIMAL FLING MOTOR (INGEN NOCLIP)
 RunService.Heartbeat:Connect(function()
     if flingActive and player.Character then
         local hrp = player.Character:FindFirstChild("HumanoidRootPart")
         if hrp then
             local oldVel = hrp.Velocity
-            
-            -- EXTREM KRAFT (ÖKAD TILL 25000+)
             hrp.Velocity = Vector3.new(25000, 25000, 25000)
-            
             RunService.RenderStepped:Wait()
-            if hrp then
-                hrp.Velocity = oldVel
-            end
+            if hrp then hrp.Velocity = oldVel end
         end
     end
-end)
-
--- SÄKERSTÄLLER ATT FLINGEN INTE BUGGAR VID NY KARAKTÄR
-player.CharacterAdded:Connect(function(char)
-    char:WaitForChild("HumanoidRootPart")
 end)
