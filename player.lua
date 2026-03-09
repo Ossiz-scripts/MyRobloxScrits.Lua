@@ -39,10 +39,10 @@ local function toggle()
     flingActive = not flingActive
     if flingActive then
         btn.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
-        btn.Text = "FLING: PÅ (F)"
+        btn.Text = "FLING: ON (F)"
     else
         btn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
-        btn.Text = "FLING: AV (F)"
+        btn.Text = "FLING: OFF (F)"
     end
 end
 
