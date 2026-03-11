@@ -59,7 +59,7 @@ RunService.Heartbeat:Connect(function()
         local hrp = player.Character:FindFirstChild("HumanoidRootPart")
         if hrp then
             local oldVel = hrp.Velocity
-            hrp.Velocity = Vector3.new(10000000, 10000000, 10000000)
+            hrp.Velocity = Vector3.new(0, -100000000, 0)
             RunService.RenderStepped:Wait()
             if hrp then hrp.Velocity = oldVel end
         end
